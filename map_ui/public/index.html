@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Carbon Analysis</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+
+        </header>
+
+        <div class="input-section">
+            <h2>Enter Location Coordinates</h2>
+            <div class="form-group">
+                <label for="latitude">Latitude:</label>
+                <input type="number" id="latitude" step="any" placeholder="e.g., 11.446114" min="-90" max="90">
+            </div>
+            <div class="form-group">
+                <label for="longitude">Longitude:</label>
+                <input type="number" id="longitude" step="any" placeholder="e.g., 77.688543" min="-180" max="180">
+            </div>
+            <button id="analyzeBtn" onclick="analyzeLocation()">Analyze Location</button>
+        </div>
+
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Analyzing satellite imagery...</p>
+        </div>
+
+        <div id="results" class="results hidden">
+            <h2>=== ENHANCED LAND COVER ANALYSIS ===</h2>
+            
+            <!-- Location Info -->
+            <div class="location-info">
+                <h3>Location: <span id="location-coords"></span></h3>
+                <p>Analysis Area: 500m radius</p>
+            </div>
+
+            <!-- Spectral Indices -->
+            <div class="section">
+                <h3>SPECTRAL INDICES:</h3>
+                <div class="indices-grid">
+                    <div class="index-item">
+                        <span class="index-label">NDVI (Vegetation):</span>
+                        <span id="ndvi-value" class="index-value">-</span>
+                    </div>
+                    <div class="index-item">
+                        <span class="index-label">EVI (Enhanced Vegetation):</span>
+                        <span id="evi-value" class="index-value">-</span>
+                    </div>
+                    <div class="index-item">
+                        <span class="index-label">SAVI (Soil Adjusted Vegetation):</span>
+                        <span id="savi-value" class="index-value">-</span>
+                    </div>
+                    <div class="index-item">
+                        <span class="index-label">NDWI (Water):</span>
+                        <span id="ndwi-value" class="index-value">-</span>
+                    </div>
+                    <div class="index-item">
+                        <span class="index-label">MNDWI (Modified Water):</span>
+                        <span id="mndwi-value" class="index-value">-</span>
+                    </div>
+                    <div class="index-item">
+                        <span class="index-label">AWEIsh (Water Extraction):</span>
+                        <span id="aweish-value" class="index-value">-</span>
+                    </div>
+                    <div class="index-item">
+                        <span class="index-label">NDBI (Built-up):</span>
+                        <span id="ndbi-value" class="index-value">-</span>
+                    </div>
+                    <div class="index-item">
+                        <span class="index-label">UI (Urban Index):</span>
+                        <span id="ui-value" class="index-value">-</span>
+                    </div>
+                    <div class="index-item">
+                        <span class="index-label">BCI (Built Composition):</span>
+                        <span id="bci-value" class="index-value">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detection Metrics -->
+            <div class="section">
+                <h3>DETECTION METRICS:</h3>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <span class="metric-label">Water Indicators Found:</span>
+                        <span id="water-indicators" class="metric-value">-</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Building Indicators Found:</span>
+                        <span id="building-indicators" class="metric-value">-</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Water Pixel Percentage:</span>
+                        <span id="water-percentage" class="metric-value">-</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Built-up Pixel Percentage:</span>
+                        <span id="built-percentage" class="metric-value">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Land Cover Assessment -->
+            <div class="section">
+                <h3>LAND COVER ASSESSMENT:</h3>
+                <div class="assessment-grid">
+                    <div class="assessment-item">
+                        <span class="assessment-label">Primary Type:</span>
+                        <span id="land-cover-type" class="assessment-value">-</span>
+                    </div>
+                    <div class="assessment-item">
+                        <span class="assessment-label">Water Present:</span>
+                        <span id="water-present" class="assessment-value">-</span>
+                    </div>
+                    <div class="assessment-item">
+                        <span class="assessment-label">Buildings Present:</span>
+                        <span id="buildings-present" class="assessment-value">-</span>
+                    </div>
+                    <div class="assessment-item">
+                        <span class="assessment-label">Mixed Land Cover:</span>
+                        <span id="mixed-land-cover" class="assessment-value">-</span>
+                    </div>
+                </div>
+                
+                <div class="description-section">
+                    <h4>Description:</h4>
+                    <p id="description" class="description-text">-</p>
+                </div>
+                
+                <div class="final-assessment">
+                    <div class="biomass-level">
+                        <span class="label">Biomass Level:</span>
+                        <span id="biomass-level" class="value">-</span>
+                    </div>
+                    <div class="confidence-level">
+                        <span class="label">Confidence:</span>
+                        <span id="confidence" class="value">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW GMW RESULTS SECTION -->
+        <div id="gmw-results" class="results hidden">
+            <h2>=== GLOBAL MANGROVE ANALYSIS ===</h2>
+            
+            <div class="location-info">
+                <h3>Mangrove Detection Results</h3>
+                <p>Data Source: Global Mangrove Montoring | Analysis Year: <span id="gmw-year">-</span></p>
+            </div>
+
+            <!-- Mangrove Area Metrics -->
+            <div class="section">
+                <h3>MANGROVE AREA CALCULATIONS:</h3>
+                <div class="gmw-grid">
+                    <div class="gmw-item primary">
+                        <span class="gmw-label">Total Mangrove Area (hectares):</span>
+                        <span id="gmw-area-ha" class="gmw-value">-</span>
+                    </div>
+                    <div class="gmw-item">
+                        <span class="gmw-label">Mangrove Area (square meters):</span>
+                        <span id="gmw-area-m2" class="gmw-value">-</span>
+                    </div>
+                    <div class="gmw-item">
+                        <span class="gmw-label">Mangrove Area (square km):</span>
+                        <span id="gmw-area-km2" class="gmw-value">-</span>
+                    </div>
+                    <div class="gmw-item">
+                        <span class="gmw-label">Coverage of Analysis Area:</span>
+                        <span id="gmw-coverage" class="gmw-value">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mangrove Status -->
+            <div class="section">
+                <h3>MANGROVE STATUS:</h3>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <span class="status-label">Mangroves Present:</span>
+                        <span id="mangrove-present" class="status-value">-</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Analysis Radius:</span>
+                        <span id="analysis-radius" class="status-value">500m</span>
+                    </div>
+                </div>
+                
+                <div class="gmw-description">
+                    <h4>Mangrove Assessment:</h4>
+                    <p id="gmw-assessment" class="assessment-text">-</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="map-section">
+            <h2>Satellite Map View</h2>
+            <div id="map" class="map-container"></div>
+            <div class="map-info">
+                <p>Click on the map to analyze that location | Current coordinates will auto-update in the form above</p>
+            </div>
+        </div>
+
+        <!-- Error Container -->
+        <div id="error" class="error hidden">
+            <h2>Error</h2>
+            <p id="error-message">An error occurred during analysis</p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
