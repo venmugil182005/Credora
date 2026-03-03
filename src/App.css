@@ -1,0 +1,183 @@
+/* Global Styles for Credora - Blue Carbon Registry Platform */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+/* CSS Variables for Design System */
+:root {
+  /* Primary Colors */
+  --deep-blue: #0D3B66;
+  --turquoise: #00B4D8;
+  
+  /* Status Colors */
+  --success-green: #28A745;
+  --error-red: #DC3545;
+  --warning-amber: #FFA500;
+  
+  /* Neutral Colors */
+  --soft-gray: #F5F5F5;
+  --white: #FFFFFF;
+  --dark-text: #333333;
+  --medium-gray: #666666;
+  --light-gray: #e0e0e0;
+  
+  /* Typography */
+  --font-primary: 'Roboto', 'Open Sans', 'Montserrat', sans-serif;
+  
+  /* Shadows */
+  --shadow-card: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-modal: 0 8px 32px rgba(0, 0, 0, 0.2);
+  
+  /* Border Radius */
+  --radius-small: 4px;
+  --radius-medium: 6px;
+  --radius-large: 8px;
+  --radius-xl: 12px;
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+body {
+  font-family: var(--font-primary);
+  color: var(--dark-text);
+  background-color: var(--soft-gray);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--deep-blue);
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+p {
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+}
+
+/* Links */
+a {
+  color: var(--turquoise);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #0088A8;
+}
+
+/* App-specific styles */
+.App {
+  min-height: 100vh;
+  background-color: var(--soft-gray);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  :root {
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 24px;
+  }
+  
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Keep original React styles for compatibility */
+
+/* Logout Button Styles */
+.logout-btn {
+  background-color: var(--warning-amber) !important;
+  color: var(--white) !important;
+  border: 2px solid var(--warning-amber) !important;
+  padding: 8px 16px !important;
+  font-size: 14px !important;
+  border-radius: var(--radius-medium) !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  margin-left: 12px !important;
+  font-weight: 500 !important;
+}
+
+.logout-btn:hover {
+  background-color: #e0941c !important;
+  border-color: #e0941c !important;
+  transform: translateY(-1px) !important;
+  box-shadow: var(--shadow-hover) !important;
+}
+
+.logout-btn:active {
+  transform: translateY(0) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+/* Responsive Design for Logout Button */
+@media (max-width: 768px) {
+  .logout-btn {
+    font-size: 12px !important;
+    padding: 6px 12px !important;
+    margin-left: 8px !important;
+  }
+}

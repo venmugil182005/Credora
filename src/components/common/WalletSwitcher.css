@@ -1,0 +1,220 @@
+/* Wallet Switcher Component Styles */
+
+.wallet-switcher {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.current-account {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.account-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.account-address {
+  font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.account-role {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.role-admin {
+  background-color: var(--error-red);
+  color: white;
+}
+
+.role-developer {
+  background-color: var(--turquoise);
+  color: white;
+}
+
+.role-buyer {
+  background-color: var(--success-green);
+  color: white;
+}
+
+.role-unregistered {
+  background-color: var(--warning-amber);
+  color: white;
+}
+
+.account-dropdown {
+  position: relative;
+}
+
+.account-dropdown-btn {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  padding: 8px 12px !important;
+  font-size: 13px !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  white-space: nowrap !important;
+}
+
+.account-dropdown-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.account-dropdown-btn:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  min-width: 280px;
+  z-index: 1000;
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+.dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+  font-weight: 600;
+  color: #333;
+}
+
+.refresh-btn {
+  background: none !important;
+  border: none !important;
+  color: var(--turquoise) !important;
+  font-size: 16px !important;
+  cursor: pointer !important;
+  padding: 4px !important;
+  border-radius: 4px !important;
+  transition: background-color 0.2s ease !important;
+}
+
+.refresh-btn:hover {
+  background-color: rgba(0, 180, 216, 0.1) !important;
+}
+
+.dropdown-item {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+.dropdown-item.active {
+  background-color: #e3f2fd;
+}
+
+.dropdown-item:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.account-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.account-item .account-address {
+  color: #333;
+  flex: 1;
+}
+
+.account-item .account-role {
+  flex-shrink: 0;
+}
+
+.current-indicator {
+  color: var(--success-green);
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.dropdown-footer {
+  padding: 12px 16px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e0e0e0;
+}
+
+.dropdown-footer .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .account-info {
+    align-items: center;
+  }
+  
+  .account-address {
+    font-size: 12px;
+  }
+  
+  .account-role {
+    font-size: 10px;
+    padding: 1px 6px;
+  }
+  
+  .account-dropdown-btn {
+    font-size: 11px !important;
+    padding: 6px 8px !important;
+  }
+  
+  .dropdown-menu {
+    min-width: 240px;
+    right: -20px;
+  }
+}
+
+/* Loading state */
+.wallet-switcher .btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Overlay to close dropdown when clicking outside */
+.dropdown-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+}

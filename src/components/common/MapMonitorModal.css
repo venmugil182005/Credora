@@ -1,0 +1,282 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.modal-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  max-width: 90vw;
+  max-height: 90vh;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+.large-modal {
+  width: 95vw;
+  height: 90vh;
+  max-width: 1400px;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  background-color: #f8f9fa;
+  border-radius: 12px 12px 0 0;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #0D3B66;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.coordinates-info {
+  background-color: #e7f3ff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #0D3B66;
+  border: 1px solid #b3d9ff;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #666;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.close-button:hover {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.modal-body {
+  padding: 0;
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #0D3B66;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-container {
+  padding: 30px;
+  text-align: center;
+  color: #333;
+}
+
+.error-container h4 {
+  color: #dc3545;
+  margin-bottom: 16px;
+  font-size: 20px;
+}
+
+.error-container p {
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.instructions {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.instructions h5 {
+  color: #0D3B66;
+  margin-bottom: 12px;
+}
+
+.instructions ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.instructions li {
+  margin-bottom: 8px;
+}
+
+.instructions code {
+  background-color: #e9ecef;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary {
+  background-color: #0D3B66;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #082540;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: #17A2B8;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #138496;
+  transform: translateY(-1px);
+}
+
+.iframe-container {
+  flex: 1;
+  position: relative;
+  background-color: #f8f9fa;
+}
+
+.map-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.monitor-info {
+  padding: 16px 24px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e0e0e0;
+  flex-shrink: 0;
+}
+
+.monitor-info p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.monitor-info strong {
+  color: #0D3B66;
+}
+
+.monitor-info em {
+  color: #666;
+  font-style: italic;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .modal-container {
+    width: 95vw;
+    height: 85vh;
+    margin: 10px;
+  }
+  
+  .modal-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 16px 20px;
+  }
+  
+  .modal-header h3 {
+    font-size: 16px;
+  }
+  
+  .coordinates-info {
+    font-size: 12px;
+    align-self: stretch;
+  }
+  
+  .close-button {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .monitor-info {
+    padding: 12px 16px;
+  }
+}
